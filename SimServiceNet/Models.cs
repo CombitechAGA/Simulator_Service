@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using SimServiceNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,13 @@ public class Snapshot
     //public ObjectId ObjectId { get; set; }
     public string ObjectId { get; set; }
     public string carID { get; set; }
-    public double speed { get; set; }
+    public string speed { get; set; }
     public DateTime timestamp { get; set; }
-    public double longitude { get; set; }
-    public double latitude { get; set; }
+    public string longitude { get; set; }
+    public string latitude { get; set; }
     public string zbeename { get; set; }
-    public double distanceTraveled { get; set; }
+    public string distanceTraveled { get; set; }
+    public string fuel { get; set; }
 }
 
 [BsonIgnoreExtraElements]
@@ -33,6 +35,8 @@ public class SimJobRouteModel
     public string carID { get; set; }
     public DateTime timestamp { get; set; } // timestamp of last (newest) snapshot 
 
+    public int snapShotIndex { get; set; }
+    
     public List<Snapshot> Snapshots { get; set; }
 
     // list of snapshot follows........
@@ -56,4 +60,14 @@ public class SimJobModel
 
     public List<SimJobRouteModel> Routes { get; set; }
     public int nrOfRoutes { get; set; }
+    public bool active { get; set; }
 }
+
+public class SimJobStatus
+{
+    public System.Threading.Thread task;
+    public string ObjectId { get; set; }
+    public bool active { get; set; }
+    public string CarID { get; set; }
+    public SimulatedCar tws { get; set; }
+ }
